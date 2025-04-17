@@ -6,6 +6,7 @@ import ISS from './Components/ISS';
 import Navbar from './Components/Navbar';
 import News from './Components/News';
 import PlanetExplorer from './Components/PlanetExplorer';
+import APOD from './Components/APOD';
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
         <Route path="/news" element={<News />} />
         <Route path="/iss-tracker" element={<ISS />} />
         <Route path="/planet-explorer" element={<PlanetExplorer />} />
+        <Route path="/apod" element={<APOD />} />
       </Routes>
     </Router>
   );

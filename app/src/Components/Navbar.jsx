@@ -8,6 +8,7 @@ function Navbar () {
       <Link to="/news" className="hover:text-blue-400">News</Link>
       <Link to="/iss-tracker" className="hover:text-blue-400">ISS Tracker</Link>
       <Link to="/planet-explorer" className="hover:text-blue-400">Planet Explorer</Link>
+      <Link to="/apod" className="hover:text-blue-400">APOD</Link>
     </nav>
   );
 };
