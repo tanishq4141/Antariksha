@@ -60,7 +60,7 @@ function News() {
         
         {newsData && (
           <div>
-            {Array.isArray(newsData) ? (
+            
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar">
                 {newsData.map((news) => (
                   <NewsCard 
@@ -73,11 +73,7 @@ function News() {
                   />
                 ))}
               </div>
-            ) : (
-              <pre className="bg-gray-800 p-4 rounded overflow-auto">
-                {JSON.stringify(newsData, null, 2)}
-              </pre>
-            )}
+            
           </div>
         )}
       </div>
