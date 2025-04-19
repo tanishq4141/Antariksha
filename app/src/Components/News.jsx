@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import NewsCard from "./NewsCard";
 
 function News() {
   const [newsData, setNewsData] = useState(null);
@@ -31,21 +32,55 @@ function News() {
     fetchNews();
   }, []);
 
+  // Function to format date
+  const formatDate = (dateString) => {
+    if (!dateString) return "Unknown date";
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  };
+
   return (
-    <div className="text-white p-8">
-      <h1 className="text-center text-3xl mb-6">Latest Space News</h1>
-      
-      {loading && <p className="text-center">Loading news...</p>}
-      
-      {error && <p className="text-red-500 text-center">{error}</p>}
-      
-      {newsData && (
-        <div className="max-w-4xl mx-auto">
-          <pre className="bg-gray-800 p-4 rounded overflow-auto">
-            {JSON.stringify(newsData, null, 2)}
-          </pre>
-        </div>
-      )}
+    <div 
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center p-8"
+      style={{
+        backgroundImage: "url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2073&auto=format&fit=crop')",
+        backgroundAttachment: "fixed"
+      }}
+    >
+      <div className="bg-black bg-opacity-70 p-8 rounded-lg backdrop-blur-sm w-full max-w-6xl">
+        <h1 className="text-center text-4xl font-bold text-white mb-8">Latest Space News</h1>
+        
+        {loading && <p className="text-center text-white text-xl">Loading news...</p>}
+        
+        {error && <p className="text-red-500 text-center text-xl">{error}</p>}
+        
+        {newsData && (
+          <div>
+            {Array.isArray(newsData) ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar">
+                {newsData.map((news) => (
+                  <NewsCard 
+                    key={news.id}
+                    title={news.title}
+                    imageUrl={news.image_url}
+                    newsText={news.news_text}
+                    timestamp={news.timestamp}
+                    siteUrl={news.site_url}
+                  />
+                ))}
+              </div>
+            ) : (
+              <pre className="bg-gray-800 p-4 rounded overflow-auto">
+                {JSON.stringify(newsData, null, 2)}
+              </pre>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
